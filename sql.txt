@@ -1,0 +1,187 @@
+
+SELECT - it is used to display
+
+You can use OR for 'or' , AND for and;
+SQRT(n,2) - to find square root.
+POWER(n,m) - to find power
+ABS(n) - to find absolute value
+MAX(column_name) - to find maXIMUM value element in a column
+MIN(column_name) -  to find minimum value element in a column
+CONCAT(string1,string2,strin3,........) - To add as many strings as you want.
+SET - to initialize a variable { example SET a=0 }
+
+
+Query all columns for all American cities in the CITY table with populations larger than 100000. The CountryCode for America is USA.
+
+SELECT *
+FROM CITY
+WHERE 
+    COUNTRYCODE = 'USA' AND POPULATION > 1000000;
+
+----------------------------------------------------------------------------------------
+
+To avoid duplicates use keyword DISTINCT
+
+Query a list of CITY names from STATION for cities that have an even ID number. Print the results in any order, but exclude duplicates from the answer.
+
+SELECT DISTINCT CITY
+FROM STATION
+    WHERE ID MOD 2 = 0 ; 
+
+-----------------------------------------------------------------------------------------
+
+Find the difference between the total number of CITY entries in the table and the number of distinct CITY entries in the table.
+The STATION table is described as follows:
+
+
+SELECT COUNT(CITY) - COUNT(DISTINCT CITY) FROM STATION;
+
+------------------------------------------------------------------------------------------------
+
+Query the two cities in STATION with the shortest and longest CITY names, as well as their respective lengths (i.e.: number of characters in the name). If there is more than one smallest or largest city, choose the one that comes first when ordered alphabetically.
+
+SELECT CITY,LENGTH(CITY) FROM STATION ORDER BY LENGTH(CITY),CITY LIMIT 1;
+SELECT CITY,LENGTH(CITY) FROM STATION ORDER BY LENGTH(CITY) DESC,CITY LIMIT 1;
+
+we have used LIMIT 1 to dislay the first city of the list after ordering
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+To extract a character from string use SUBSTR(string,from_index,to_index) and to convert to lower case use LOWER(string) { Indexing starts from 1}
+
+Query the list of CITY names starting with vowels (i.e., a, e, i, o, or u) from STATION. Your result cannot contain duplicates.
+
+SELECT DISTINCT CITY FROM STATION 
+WHERE LOWER(SUBSTR(CITY,1,1)) IN ('a','e','i','o','u')
+
+----------------------------------------------------------------------------------------------------------------------------------------- 
+
+Query the list of CITY names from STATION which have vowels (i.e., a, e, i, o, and u) as both their first and last characters. Your result cannot contain duplicates.
+
+SELECT DISTINCT CITY FROM STATION WHERE LOWER(SUBSTR(CITY,1,1)) IN ('a','e','i','o','u') AND UPPER(SUBSTR(CITY,LENGTH(CITY),LENGTH(CITY))) IN ('a','e','i','o','u');
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Use of NOT IN ..
+
+Query the list of CITY names from STATION that do not start with vowels
+
+SELECT DISTINCT CITY FROM STATION WHERE LOWER(SUBSTR(CITY,1,1)) NOT IN ('a','e','i','o','u'); 
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+Use 'WHERE' before 'ORDER BY'
+
+Query the Name of any student in STUDENTS who scored higher than  Marks. Order your output by the last three characters of each name. If two or more students both have names ending in the same last three characters (i.e.: Bobby, Robby, etc.), secondary sort them by ascending ID.
+
+SELECT NAME 
+FROM STUDENTS 
+WHERE MARKS > 75 
+ORDER BY SUBSTR(NAME,LENGTH(NAME)-2,LENGTH(NAME)),ID ASC;
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+Write a query that prints a list of employee names (i.e.: the name attribute) from the Employee table in alphabetical order.
+
+SELECT NAME 
+FROM EMPLOYEE
+ORDER BY NAME
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+For rounding a number to a certain decimal place use ROUND(number,4) { here 4 represents upto 4th  decimal place }
+
+The Manhattan Distance is |x1 - x2| + |y1 - y2| = |a - c| + |b - d|."
+
+
+Consider P1(a,b) and P2(c,d) to be two points on a 2D plane.
+
+a happens to equal the minimum value in Northern Latitude (LAT_N in STATION).
+b happens to equal the minimum value in Western Longitude (LONG_W in STATION).
+c happens to equal the maximum value in Northern Latitude (LAT_N in STATION).
+d happens to equal the maximum value in Western Longitude (LONG_W in STATION).
+Query the Manhattan Distance between points P1 and P2 and round it to a scale of 4 decimal places.
+
+
+SELECT ROUND(ABS(MIN(LAT_N)-MAX(LAT_N)) + ABS(MIN(LONG_W)-MAX(LONG_W)), 4) FROM STATION;
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+
+
+Consider  and  to be two points on a 2D plane where  are the respective minimum and maximum values of Northern Latitude (LAT_N) and  are the respective minimum and maximum values of Western Longitude (LONG_W) in STATION.
+
+Query the Euclidean Distance between points  and  and format your answer to display  decimal digits.
+
+
+SELECT ROUND(SQRT(POWER(MIN(LAT_N)-MAX(LAT_N),2)+POWER(MIN(LONG_W)-MAX(LONG_W),2)),4) FROM STATION;
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+IF CONDITION ::::
+
+Write a query identifying the type of each record in the TRIANGLES table using its three side lengths. Output one of the following statements for each record in the table:
+
+Equilateral: It's a triangle with  sides of equal length.
+Isosceles: It's a triangle with  sides of equal length.
+Scalene: It's a triangle with  sides of differing lengths.
+Not A Triangle: The given values of A, B, and C don't form a triangle.
+
+SELECT IF(A+B>C AND A+C>B AND B+C>A, IF(A=B AND B=C, 'Equilateral', IF(A=B OR B=C OR A=C, 'Isosceles', 'Scalene')), 'Not A Triangle') FROM TRIANGLES;
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Generate the following two result sets:
+
+Query an alphabetically ordered list of all names in OCCUPATIONS, immediately followed by the first letter of each profession as a parenthetical (i.e.: enclosed in parentheses). For example: AnActorName(A), ADoctorName(D), AProfessorName(P), and ASingerName(S).
+Query the number of ocurrences of each occupation in OCCUPATIONS. Sort the occurrences in ascending order, and output them in the following format:
+
+Sample Output
+
+Ashely(P)
+Christeen(P)
+Jane(A)
+Jenny(D)
+Julia(A)
+Ketty(P)
+Maria(A)
+Meera(S)
+Priya(S)
+Samantha(D)
+There are a total of 2 doctors.
+There are a total of 2 singers.
+There are a total of 3 actors.
+There are a total of 3 professors.
+
+
+SELECT CONCAT(NAME,"(",SUBSTR(OCCUPATION,1,1),')') FROM OCCUPATIONS ORDER BY NAME;  
+SELECT CONCAT("There are a total of ",COUNT(OCCUPATION)," ",LOWER(OCCUPATION),"s.") FROM OCCUPATIONS GROUP BY OCCUPATION ORDER BY COUNT(OCCUPATION),OCCUPATION;
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+USE OF CASE::
+
+Question - Occupation
+
+Pivot the Occupation column in OCCUPATIONS so that each Name is sorted alphabetically and displayed underneath its corresponding Occupation. The output column headers should be Doctor, Professor, Singer, and Actor, respectively.
+
+Note: Print NULL when there are no more names corresponding to an occupation.
+
+SET @r1=0, @r2=0, @r3 =0, @r4=0;
+SELECT MIN(Doctor), MIN(Professor), MIN(Singer), MIN(Actor) FROM
+(SELECT CASE Occupation WHEN 'Doctor' THEN @r1:=@r1+1                { here Occupation is wrritten between 'case' and 'when" because it is used 4 times so overwork.}
+                       WHEN 'Professor' THEN @r2:=@r2+1
+                       WHEN 'Singer' THEN @r3:=@r3+1
+                       WHEN 'Actor' THEN @r4:=@r4+1 END
+       AS RowLine,
+       CASE WHEN Occupation = 'Doctor' THEN Name END AS Doctor,
+       CASE WHEN Occupation = 'Professor' THEN Name END AS Professor,
+       CASE WHEN Occupation = 'Singer' THEN Name END AS Singer,
+       CASE WHEN Occupation = 'Actor' THEN Name END AS Actor
+       FROM OCCUPATIONS ORDER BY Name) AS t
+GROUP BY RowLine;
+
+
+--------------------------------------------------------------------------------------------------------------------------------------
+

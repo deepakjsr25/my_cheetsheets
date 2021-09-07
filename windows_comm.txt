@@ -1,0 +1,1 @@
+$PSVersionTable /// to check version of powershell {type in powershell}

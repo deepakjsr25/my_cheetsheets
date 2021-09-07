@@ -1,0 +1,31 @@
+                        docker cheetsheet
+
+docker images
+docker pull ubuntu
+               {image id uniquely identifies your image}
+docker images --no-trunc { to see full image ID}
+mkdir directory_name { to make a directory}
+cd directory_name    { to open a directory }
+vim document_name { to crete a docker file }  
+
+                 { press: 'ESC' + ':' + 'w' + 'q' + '!'  to exit}
+
+write some lines of code - 
+           {  FROM ubuntu
+              RUN apt-get update
+              RUN apt-get install -y python3
+              LABEL maintainer="deepakjsr25"
+            } (without curly braces)
+
+docker build .  {to build above created file }
+
+docker image ls { to se the installed images }
+
+docker container run -it --name python-container Image ID { To open a container }
+
+apt install vim
+vim hello.py
+python3 hello.py
+
+
+docker container ls -a { To  see the exited container }

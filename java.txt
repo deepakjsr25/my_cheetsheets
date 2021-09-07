@@ -1,0 +1,2 @@
+to input string-  { scan.nextLine();
+        String s = scan.nextLine(); }

@@ -1,0 +1,113 @@
+###pakages
+
+import re --> A RegEx, or Regular Expression, is a sequence of characters that forms a search pattern.RegEx can be used to check if a string contains the specified search pattern.
+
+##########
+
+
+if __name__ == '__main__': ///// beginning line of a file . 
+
+for _ in range(int(input())): /////   here '__' means  that you don’t care about the current value of the variable.
+use 'and' not '&' 
+list.append();
+list.sort(); //sorts in assending order with repeatation
+len(list); // to find the length of list
+for i in reversed(listo): // to loop list in reverse 
+for i in range(1,n,c): //n is variable and c is increment
+2**3      //2^3
+sub_li.sort(key = lambda x: [x[1],x[0]]) /// sorting by first index and then by another index. Example...list = [["deepak",10,'C'],["jyoti",50,'B'],["Rupa",40,'A']]. Sorting by score and then by name.
+line.split(); ///to split line string in words
+line = input().split() ///// to split at the time when its getting input
+scores = list(map(float, line)) /// to input ana array scores from a variable 'line' which contains string integers. 
+student_marks[name] = scores //// mapping
+query_name = input() ///// to input string
+n = int(input()) /// to input a number
+"{:.2f}".format(number_you want_to_convert) ///// to convert a number upto 2 decimal points
+ 
+if n % 2 != 0:
+    print("Weird")
+    
+elif n % 2 == 0  and n >= 2 and n <= 5 :
+    print("Not Weird")
+
+-------------------------------------------
+
+a = int(input())
+--------------------------------
+
+The result of the integer division . --> print (a//b)
+The result of the float division is . --> print (a/b)
+
+Sample Input 0
+
+4
+3
+Sample Output 0
+
+1
+1.33333333333
+
+----------------------------------------------------------------------------------
+
+To print numbers in same line 
+
+---->
+       for i in range(1,n+1):
+        print (i,end='')
+
+-------------------------------------------------------------------------------------
+
+using list in python --
+
+-------------------------------------------------------------------------------------------
+
+Using a function 
+
+ def sort(sub_li):
+    sub_li.sort(key = lambda x: [x[1],x[0]])
+    # sub_li.sort(key = lambda x: x[0])    
+    return sub_l                                     ////this function returns list
+
+-------------------------------------------------------------------------------------------
+
+join function ?
+
+myTuple = ("John", "Peter", "Vicky")
+
+x = "#".join(myTuple)  
+
+Output -- John#Peter#Vicky
+-----------------------------------------------------------------------------------
+
+Validating UID
+
+
+import re
+for _ in range(int(input())):
+    uid = input()
+    uid = "".join(sorted(uid))  #to give output as  sorted string i
+    print (uid)
+    if (re.search(r"[A-Z]{2}",uid) and #2 uppercase alphabets
+        re.search(r"\d{3}",uid) and #3+ digits
+        not re.search(r"[^A-Za-z0-9]",uid) and #no nonalphanumeric
+        not re.search(r"(\w)\1",uid) and #no repetition
+        len(uid) == 10): #10 characters long
+        print("Valid")
+    else:
+        print("Invalid")     
+
+
+ { Normal strings use the backslash character as an escape character for special characters (like newlines):
+
+>>> print('this is \n a test')
+this is 
+ a test
+The r prefix tells the interpreter not to do this:
+
+>>> print(r'this is \n a test')
+this is \n a test
+>>> 
+
+}}
+
+---------------------------------------------------------------------------------------------------------

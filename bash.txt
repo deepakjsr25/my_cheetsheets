@@ -1,0 +1,221 @@
+cut#1
+
+Hello
+World
+how are you
+
+l
+r
+w
+
+ --> cut -b 3
+
+---------------------------------------------------
+
+cut#2
+
+print 2nd and 7th character
+
+Hello
+World
+how are you
+
+Sample Output
+
+e
+o
+oe
+
+--->  cut -b 2,7
+
+--------------------------------------------------------------
+
+cut#3
+
+Sample Input
+
+Hello
+World
+how are you
+
+Sample Output
+
+ello
+orld
+ow are
+
+-----> cut -b 2-7
+
+------------------------------------------------------------------
+cut#5
+
+Sample Input
+
+1   New York, New York[10]  8,244,910   1   New York-Northern New Jersey-Long Island, NY-NJ-PA MSA  19,015,900  1   New York-Newark-Bridgeport, NY-NJ-CT-PA CSA 22,214,083
+2   Los Angeles, California 3,819,702   2   Los Angeles-Long Beach-Santa Ana, CA MSA    12,944,801  2   Los Angeles-Long Beach-Riverside, CA CSA    18,081,569
+3   Chicago, Illinois   2,707,120   3   Chicago-Joliet-Naperville, IL-IN-WI MSA 9,504,753   3   Chicago-Naperville-Michigan City, IL-IN-WI CSA  9,729,825
+4   Houston, Texas  2,145,146   4   Dallas-Fort Worth-Arlington, TX MSA 6,526,548   4   Washington-Baltimore-Northern Virginia, DC-MD-VA-WV CSA 8,718,083
+5   Philadelphia, Pennsylvania[11]  1,536,471   5   Houston-Sugar Land-Baytown, TX MSA  6,086,538   5   Bo
+
+Sample Output
+
+1   New York, New York[10]  8,244,910
+2   Los Angeles, California 3,819,702
+3   Chicago, Illinois   2,707,120
+4   Houston, Texas  2,145,146
+5   Philadelphia, Pennsylvania[11]  1,536,471
+
+----->  cut  -f 1,2,3
+
+-------------------------------------------------------------------------------------
+
+cut#6
+
+Print the characters from thirteenth position to the end.
+
+---> cut -b 13-
+-------------------------------------------------------------------------
+
+Cut #8:
+
+The output should contain N lines. For each input sentence, identify and display its first three words. Assume that the space (' ') is the only delimiter between words.
+
+---> cut -d' ' -f1,2,3  { delimeter breaks the sentence into parts and field accesses                         those parts}
+					
+----------------------------------------------------------------------------------------
+
+Cut #9:
+
+----->cut -f 2-	
+
+=================================================================
+		echo "HELLO"
+** 
+for((i = 1 ; i <=99 ; i= i +2))
+do
+echo "$i"
+done
+**
+
+read name
+echo Welcome "$name"
+**
+
+for((i = 1; i<=50;i++));
+do
+echo $i;
+done
+
+
+read x 
+read y
+echo $((x+y));
+echo $((x-y));
+echo $((x*y));
+echo $((x/y));
+
+************
+read x
+read y
+
+if ((x > y))
+then
+echo  X is greater than Y
+fi
+
+if ((x == y))
+then
+echo  X is equal to Y
+fi
+
+if ((x < y))
+then
+echo  X is less than Y
+fi
+
+**************************
+
+read c;
+
+if [ $c == 'y' ] || [ $c == 'Y' ]
+then
+echo "YES";
+fi
+
+if [ $c == 'n' ] || [ $c == 'N' ]
+then 
+echo "NO";
+fi
+
+**********************
+
+read x;
+read y;
+read z;
+
+if [ $x == $y ] && [ $y == $z ]
+then
+echo "EQUILATERAL"
+elif [ $x == $y ] || [ $y == $z ] || [ $y == $z ]
+then
+echo "ISOSCELES"
+else
+echo "SCALENE"
+fi
+
+*************************************
+
+read x
+printf "%.3f\n" $(echo "scale=5;$x" | bc -l)
+
+**************************************************
+
+read var;
+
+sum=0;
+
+for((i=0;i<var;i++))
+do
+read n;
+sum=$((sum + n)); 
+done
+
+printf "%.3f\n"  $(echo "scale=4;$sum/$var" | bc -l)
+
+****************************************************
+
+declare -A a
+
+# credits to https://github.com/MaskRay/HackerRank/blob/master/shell/fractal-trees-all.sh
+# d - depth
+# l = length
+# r = row
+# c = column
+
+f() {
+    local d=$1 l=$2 r=$3 c=$4
+    [[ $d -eq 0 ]] && return
+    for ((i=l; i; i--)); do
+        a[$((r-i)).$c]=1
+    done
+    ((r -= l))
+    for ((i=l; i; i--)); do
+        a[$((r-i)).$((c-i))]=1
+        a[$((r-i)).$((c+i))]=1
+    done
+    f $((d-1)) $((l/2)) $((r-l)) $((c-l))
+    f $((d-1)) $((l/2)) $((r-l)) $((c+l))
+}
+read n
+f $n 16 63 49
+for ((i=0; i<63; i++)); do
+    for ((j=0; j<100; j++)); do
+        if [[ ${a[$i.$j]} ]]; then
+            printf 1
+        else
+            printf _
+        fi
+    done
+    echo
+done
+													
