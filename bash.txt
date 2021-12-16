@@ -218,4 +218,156 @@ for ((i=0; i<63; i++)); do
     done
     echo
 done
+
+********************************************************************************
+
+Use of HEAD and TAIL : usefull when you work with text files and log files.
+
+{sometimes To access log files you need root access --> sudo -s}
+{cat file.exe : is used to view the content of file }
+
+head file_name.exe ----------->>> will show the first 10 lines of file
+tail file_name.exe -----------> will show the last 10 lines of file
+
+head -n3 file_name.exe -----------> to display first three lines 
+head -n4 file_name.exe -----------> to display first four lines
+ { same with tail also , just opposite of head }
+
+{you can also write without n }
+head -3 file_name.exe -----------> to display first three lines 
+head -4 file_name.exe -----------> to display first four lines
+
+head file_name1.exe  file_name2.exe -----------> will show the first 10 lines of both files at same time.If more than one input file is provided, head will return the first ten lines from each file, precede each set of lines by the name of the file and separate each set of lines by one vertical space.
+
+tail -f file_name.txt -----------> '-f' stands for follow on . the command shows changes in file in real time (oviously form last) . usefull in troubleshooting
+
+head -c 20 [filename]  -----------> First 20 characters {When head counts by bytes, it also includes the newline character, which is a non-printing (i.e, invisible) character that is designated by a backslash and the letter n (i.e., \n). Thus, for example, if there are three new, blank lines at the start of a file, they will be counted as three characters, along with the printing characters }
+
+head -c5k aardvark -----------> The number of bytes or lines can be followed by a multiplier suffix. That is, adding the letter b directly after the number of bytes multiplies it by 512, k multiplies it by 1024 and m multiplies it by 1048576. Thus, the following command would display the first five kilobytes of the file aardvark:
+
+{{{NOTE : The -c option is less tolerant than the -n option. That is, there is no default number of bytes, and thus some integer must be supplied. Also, the letter c cannot be omitted as can the letter n, because in such case head would interpret the hyphen and integer combination as the -n option. }}}
+
+
+head -n 12 Yuriko > December ----------->   For example, the following would copy the first 12 lines of the file Yuriko to the file December . If the file named December did not yet exist, the redirection operator would create it; if it already existed, the redirection operator would overwrite it.
+
+head -n 12 Yuriko >> December ------------> To avoid erasing data on an existing file, the append operator (which is represented by two consecutive rightward pointing angle brackets) could be used to add the output from head to the end of a file with that name if it already existed (or otherwise create a new file with that name),
+
+ls | head -------->>>  The output from other commands can be sent via a pipe (represented by the vertical bar character) to head to use as its input. For example, the following sends the output from the ls command (which by default lists the names of the files and directories in the current directory) to head, which, in turn, displays the first ten lines of the output that it receives from ls:
+
+ls | head >> file1 ------>>>> This output could easily be redirected, for example to the end of a file named file1.
+
+head -10 bash.txt | sort -r ---->>> sorts 
+ls | head | sort -r >> file1  --------->>>  the sort filter could be used with its -r option to sort the output in reverse alphabetic order prior to appending file1:
+
+
+head -n 22 | tail -n 11 ------->>>> Display the lines (from line number 12 to 22, both inclusive) of a given text file.
+
+
+
+
+******************************************************************************************************************************************************************
+
+Use of 'Tr' command (Translate command)
+
+It translates indivisual characters and not strings. 
+
+Example 1 : 'e' being transformed to 'E'.
+
+$ echo "Hello" | tr "e" "E"
+HEllo
+
+
+
+Example 2 : Spaces being transformed to hyphens.
+
+$ echo "Hello how are you" | tr " " '-'
+Hello-how-are-you
+
+
+
+Example 3 : Digits (numerals) being deleted.
+
+$ echo "Hello how are you 1234" | tr -d [0-9]
+Hello how are you 
+
+
+go to this - site { https://www.thegeekstuff.com/2012/12/linux-tr-command/ } for more uses of 'tr' 
+
+1. Convert lower case to upper case
+
+The following command will also convert lower case to upper case
+
+$ tr [:lower:] [:upper:]
+thegeekstuff
+THEGEEKSTUFF
+
+
+You can also use ranges in tr. The following command uses ranges to convert lower to upper case.
+
+$ tr a-z A-Z
+thegeekstuff
+THEGEEKSTUFF
+
+
+
+2. Translate braces into parenthesis
+
+You can also translate from and to a file. In this example we will translate braces in a file with parenthesis.
+
+$ tr '{}' '()' < inputfile > outputfile
+The above command will read each character from “inputfile”, translate if it is a brace, and write the output in “outputfile”.
+
+
+
+3. Translate white-space to tabs
+The following command will translate all the white-space to tabs
+
+$ echo "This is for testing" | tr [:space:] '\t'
+This	is	for	testing
+
+
+
+Similarly you can convert multiple continuous spaces with a single space
+
+$ echo "This  is  for testing" | tr -s [:space:] ' '
+This is for testing
+
+
+
+5. Delete specified characters using -d option
+tr can also be used to remove particular characters using -d option.
+
+$ echo "the geek stuff" | tr -d 't'
+he geek suff
+
+
+To remove all the digits from the string, use
+
+$ echo "my username is 432234" | tr -d [:digit:]
+my username is
+
+
+
+6. Complement the sets using -c option
+You can complement the SET1 using -c option. For example, to remove all characters except digits, you can use the following.
+
+$ echo "my username is 432234" | tr -cd [:digit:]
+432234
+
+
+7. Remove all non-printable character from a file
+The following command can be used to remove all non-printable characters from a file.
+
+$ tr -cd [:print:] < file.txt
+
+
+
+8. Join all the lines in a file into a single line
+The below command will translate all newlines into spaces and make the result as a single line.
+
+$ tr -s '\n' ' ' < file.txt
+
+
+
+
 													

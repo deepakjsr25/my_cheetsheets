@@ -1,2 +1,25 @@
 to input string-  { scan.nextLine();
         String s = scan.nextLine(); }
+
+
+Scanner sc=new Scanner(System.in); /// To input
+s1.length() // to find length of string
+System.out.println() /// Remember after printing the curcur goes to next line
+
+{ BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(bufferedReader.readLine().trim()); 
+                    bufferedReader.close(); } --> Another way to input ;
+
+Integer.Size : 32 bits 
+
+Math.pow(a,b) : returns double
+
+         
+{
+int i=1;
+        while (sc.hasNext()) {
+        	String s=sc.nextLine();
+        	System.out.println(i + " " + s);
+        	i++;
+        }
+}  ----> a program to input until end of file
